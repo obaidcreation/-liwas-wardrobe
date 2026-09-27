@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fabric Guide: Lawn, Khaddar, Boski & More | LIWA's Wardrobe</title>
+<meta name="description" content="Learn the difference between lawn, cotton, linen, khaddar, karandi, chiffon, wash & wear and boski. Plus a metre calculator for gents suits.">
+<meta name="theme-color" content="#151311">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIWA's Wardrobe">
+<meta property="og:title" content="Fabric Guide: Lawn, Khaddar, Boski & More | LIWA's Wardrobe">
+<meta property="og:description" content="Learn the difference between lawn, cotton, linen, khaddar, karandi, chiffon, wash & wear and boski. Plus a metre calculator for gents suits.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="guide">
+<div id="head"></div>
+<main id="main">
+
+<div class="phead"><div class="crumb"><a href="index.html">Home</a> / Fabric Guide</div><h1 class="title">Fabric Guide</h1><p class="lede" style="margin:auto">Everything you need to choose the right unstitched fabric: what each one feels like, when to wear it, and how much you need.</p>
+<div class="toc"><a class="chip" href="#pieces">What's in a suit</a><a class="chip" href="#glossary">Fabric glossary</a><a class="chip" href="#meter">Gents metre calculator</a><a class="chip" href="#finder">Fabric finder</a></div></div>
+
+<section class="wrap" id="pieces"><div class="sh"><div class="kick">Ladies unstitched</div><h2 class="title">What comes in a suit?</h2><p class="lede">Standard cuts for our ladies' suits. A 2-piece suit has the shirt and trouser only.</p></div>
+<div class="pieces"><div><b>3 m</b>Shirt<br><span class="note">Front, back and sleeves</span></div><div><b>2.5 m</b>Dupatta<br><span class="note">3-piece suits only</span></div><div><b>2.5 m</b>Trouser<br><span class="note">Dyed cambric or matching fabric</span></div></div></section>
+
+<section class="wrap" id="glossary" style="padding-top:10px"><div class="sh"><div class="kick">Glossary</div><h2 class="title">Know your fabric</h2></div>
+<div class="gtable"><table><thead><tr><th>Fabric</th><th>Season</th><th>For</th><th>How it feels</th><th>Best for</th><th>Care</th></tr></thead><tbody id="gl"></tbody></table></div></section>
+
+<section class="wrap" id="meter"><div class="calc">
+  <div><div class="kick">Gents</div><h2 class="title">How many metres do you need?</h2><p class="lede">Move the sliders to your height and build. This is a general guide; your tailor can confirm.</p>
+    <div class="field" style="margin-top:20px"><label for="h">Height: <span id="hv"></span></label><input type="range" id="h" min="60" max="76" value="68"></div>
+    <div class="field"><label for="b">Build</label><select id="b"><option value="0">Slim</option><option value="1" selected>Regular</option><option value="2">Broad / heavy</option></select></div>
+    <div class="field"><label for="st">Style</label><select id="st"><option value="0">Shalwar kameez</option><option value="1">Kurta pajama</option></select></div></div>
+  <div class="out" aria-live="polite"><div class="kick">You need about</div><b id="mv">4 m</b><p class="note" id="mn"></p><a class="btn" href="shop.html?c=gents" style="margin-top:12px">Shop gents fabric</a></div>
+</div></section>
+
+<section class="wrap"><div class="finder" id="finder">
+  <div><div class="kick">Fabric Finder</div><h2 class="title">Not sure which fabric to buy?</h2><p class="lede">Answer three quick questions and we will suggest the right fabric for you.</p>
+    <div class="q" style="margin-top:22px">
+      <fieldset><legend>Who is it for?</legend><div class="pills"><button type="button" class="pill" data-k="who" data-v="L">Ladies</button><button type="button" class="pill" data-k="who" data-v="G">Gents</button></div></fieldset>
+      <fieldset><legend>Which season?</legend><div class="pills"><button type="button" class="pill" data-k="when" data-v="summer">Summer</button><button type="button" class="pill" data-k="when" data-v="winter">Winter</button></div></fieldset>
+      <fieldset><legend>Where will you wear it?</legend><div class="pills"><button type="button" class="pill" data-k="use" data-v="daily">Daily wear</button><button type="button" class="pill" data-k="use" data-v="office">Office / college</button><button type="button" class="pill" data-k="use" data-v="event">Eid / wedding</button></div></fieldset>
+    </div></div>
+  <div class="result" aria-live="polite"></div>
+</div></section>
+
+</main>
+<div id="foot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/finder.js"></script>
+<script>
+(function(){const {$,esc}=LW;
+const S={summer:'Summer',winter:'Winter',all:'All season'};
+$('#gl').innerHTML=FABRICS.map(f=>{const has=PRODUCTS.some(p=>p.f===f.n);return `<tr><td>${has?`<a href="shop.html?f=${encodeURIComponent(f.n)}">${esc(f.n)}</a>`:esc(f.n)}</td><td><span class="tag ${f.s}">${S[f.s]}</span></td><td>${f.who==='L'?'Ladies':f.who==='G'?'Gents':'Ladies & Gents'}</td><td>${esc(f.feel)}</td><td>${esc(f.best)}</td><td>${esc(f.care)}</td></tr>`}).join('');
+function calc(){const h=+$('#h').value,b=+$('#b').value,s=+$('#st').value;$('#hv').textContent=Math.floor(h/12)+"' "+(h%12)+'"';
+  let m=h<=66?3.75:h<=70?4:h<=73?4.5:5;m+=b===2?.5:b===0&&h<=66?0:0;if(s===1)m-=.25;
+  $('#mv').textContent=m+' m';$('#mn').textContent=`For ${Math.floor(h/12)}'${h%12}", ${['slim','regular','broad'][b]} build, ${s?'kurta pajama':'shalwar kameez'}. Most of our gents suits are 4 m; choose the 4.5 m option if you need more.`;}
+['h','b','st'].forEach(i=>$('#'+i).addEventListener('input',calc));calc();})();
+</script>
+</body>
+</html>

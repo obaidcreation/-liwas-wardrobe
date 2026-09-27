@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Product | LIWA's Wardrobe</title>
+<meta name="description" content="Unstitched suit details, fabric specifications and delivery information.">
+<meta name="theme-color" content="#151311">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIWA's Wardrobe">
+<meta property="og:title" content="Product | LIWA's Wardrobe">
+<meta property="og:description" content="Unstitched suit details, fabric specifications and delivery information.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="product">
+<div id="head"></div>
+<main id="main">
+
+<div class="wrap"><div class="crumb" style="padding-top:22px" id="crumb"></div>
+<div class="pdp" id="pdp"></div></div>
+<section class="wrap" style="padding-top:0"><div class="sh"><div class="kick">Complete your wardrobe</div><h2 class="title">You may also like</h2></div><div class="rail" id="related"></div></section>
+</main>
+<div id="foot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function(){const {$,$$,rs,esc,wa,art,paint,card,who,pct}=LW;
+const id=new URLSearchParams(location.search).get('id');const p=LW.byId(id);
+if(!p){$('#pdp').innerHTML='<div class="done" style="grid-column:1/-1"><b>This suit is not available</b><p>It may have sold out. Browse our latest collection instead.</p><a class="btn" href="shop.html">Shop all</a></div>';$('#related').innerHTML=PRODUCTS.slice(0,6).map(card).join('');paint();return;}
+LW.markSeen(p.id);document.title=`${p.n} ${p.f} ${p.w==='L'?p.pc+'-Piece':'Suit'} | LIWA's Wardrobe`;
+const fab=FABRICS.find(x=>x.n===p.f)||{};const opts=LW.options(p);let o=0,q=1;const out=p.stock===false;
+const views=[['a','Full fabric'],['b','Close-up'],['c',p.w==='L'?'Dupatta':'Weave detail'],['d','Folded']];
+const spec=p.w==='L'?[['Fabric',p.f],['Work',p.work],['Shirt','3 m '+p.f.toLowerCase()],...(p.pc===3?[['Dupatta','2.5 m']]:[]),['Trouser','2.5 m'],['Pieces',p.pc+'-Piece unstitched']]:[['Fabric',p.f],['Finish',p.work],['Length',p.pc+' m (kameez + shalwar)'],['Suitable height','Up to '+(p.pc>=4.5?'6\'0"':'5\'10"')],['Type','Unstitched suiting']];
+$('#crumb').innerHTML=`<a href="index.html">Home</a> / <a href="shop.html?c=${p.w==='L'?'ladies':'gents'}">${who(p)} Unstitched</a> / ${esc(p.n)}`;
+$('#pdp').innerHTML=`
+<div class="gal"><div class="thumbs">${views.map(([v,l],i)=>`<button type="button" data-view="${v}" aria-label="${l}" aria-current="${i===0}">${art(p,v,120,160)}</button>`).join('')}</div>
+  <div class="main-img" id="main" title="Tap to zoom">${art(p,'a',720,960)}</div></div>
+<div class="info">
+  <div class="kick">${who(p)} Unstitched · ${esc(p.f)}</div>
+  <h1>${esc(p.n)} — ${esc(p.work)} ${esc(p.f)}</h1>
+  <div class="note">SKU: ${p.id}</div>
+  <div class="price" style="margin-top:10px"><b>${rs(p.p)}</b>${p.o?`<s>${rs(p.o)}</s><span class="off">Save ${pct(p)}%</span>`:''}</div>
+  <p class="desc">${esc(p.d)}</p>
+  <div class="kick" style="margin-bottom:8px">${p.w==='L'?'Pieces':'Length'}</div>
+  <div class="opt-row" id="opts">${opts.map(([l,d],i)=>`<button type="button" class="opt" data-o="${i}" aria-pressed="${i===0}">${l}${d?` (${d>0?'+':'−'}${rs(Math.abs(d))})`:''}</button>`).join('')}</div>
+  ${p.w==='G'?'<p class="note" style="margin-top:8px">Not sure? <a class="link" href="fabric-guide.html#meter">Check how many metres you need</a></p>':''}
+  <div class="buy"><div class="qty"><button type="button" id="qm" aria-label="Decrease">−</button><span id="qv">1</span><button type="button" id="qp" aria-label="Increase">+</button></div>
+    <button class="btn" type="button" id="add" ${out?'disabled':''}>${out?'Sold out':'Add to bag'}</button></div>
+  <a class="btn wa" id="now" href="#" target="_blank" rel="noopener" style="width:100%">${out?'Ask when it is back':'Order now on WhatsApp'}</a>
+  <div class="eta"><svg viewBox="0 0 24 24"><path d="M1 7h13v9H1zM14 10h4l3 3v3h-7"/><circle cx="5" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>Order today, delivered <b>${LW.eta('lahore')}</b> in major cities. Cash on delivery available.</span></div>
+  <div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:14px"><button type="button" class="link" style="background:none;border:0;cursor:pointer;padding:0" data-wish="${p.id}" aria-pressed="${LW.wish.includes(p.id)}">♡ Save to wishlist</button><a class="link" id="ask" href="#" target="_blank" rel="noopener">Ask a question</a><button type="button" class="link" style="background:none;border:0;cursor:pointer;padding:0" id="share">Share this suit</button></div>
+  <div class="acc">
+    <details open><summary>Fabric details</summary><div class="body"><table class="spec">${spec.map(([a,b])=>`<tr><td>${a}</td><td>${esc(b)}</td></tr>`).join('')}</table></div></details>
+    <details><summary>Care instructions</summary><div class="body">${esc(fab.care||'Wash gently in cold water. Iron on medium heat.')} Wash dark colours separately the first time.</div></details>
+    <details><summary>Delivery & exchange</summary><div class="body">Delivery all over Pakistan in 2–5 working days. ${rs(SETTINGS.deliveryCharge)} delivery, free above ${rs(SETTINGS.freeDeliveryAbove)}. Uncut fabric in its original packing can be exchanged within ${SETTINGS.exchangeDays} days. <a class="link" href="policies.html">Read full policy</a></div></details>
+    <details><summary>Colour note</summary><div class="body">Colours may look slightly different on your screen because of lighting and display settings. Ask us on WhatsApp for a real-light video before you order.</div></details>
+  </div>
+</div>`;
+paint($('#pdp'));
+const setWa=()=>{const [l,d]=opts[o];$('#now').href=wa(out?`Assalam o Alaikum! ${p.n} (${p.id}) dobara kab available hoga?`:`Assalam o Alaikum LIWA's Wardrobe! Mujhe ye suit chahiye:\n${p.n} — ${p.f} (${p.id})\n${l} × ${q} = Rs ${(p.p+d)*q}\n\nName:\nPhone:\nCity:\nAddress:`);};
+$('#ask').href=wa(`Assalam o Alaikum! ${p.n} — ${p.f} (${p.id}) ke baare mein poochna tha: `);setWa();
+$('#opts').onclick=e=>{const b=e.target.closest('[data-o]');if(!b)return;o=+b.dataset.o;$$('#opts .opt').forEach(x=>x.setAttribute('aria-pressed',x===b));setWa();};
+$('#qm').onclick=()=>{q=Math.max(1,q-1);$('#qv').textContent=q;setWa();};$('#qp').onclick=()=>{q++;$('#qv').textContent=q;setWa();};
+$('#add').onclick=()=>{LW.addToBag(p.id,opts[o][0],q);LW.open('bag');};
+$('.thumbs').onclick=e=>{const b=e.target.closest('[data-view]');if(!b)return;$$('.thumbs button').forEach(x=>x.setAttribute('aria-current',x===b));$('#main').innerHTML=art(p,b.dataset.view,720,960);paint($('#main'));};
+$('#main').onclick=()=>$('#main').classList.toggle('z');
+$('#share').onclick=async()=>{const u=location.href;try{if(navigator.share){await navigator.share({title:p.n,url:u});return;}await navigator.clipboard.writeText(u);LW.toast('Link copied');}catch(e){LW.toast('Copy this link: '+u);}};
+const rel=PRODUCTS.filter(x=>x.id!==p.id&&(x.f===p.f||x.w===p.w)).slice(0,8);$('#related').innerHTML=rel.map(card).join('');paint($('#related'));
+})();
+</script>
+</body>
+</html>

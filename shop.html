@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop Unstitched | LIWA's Wardrobe</title>
+<meta name="description" content="Browse ladies and gents unstitched suits by fabric, pieces, season and price. Cash on delivery all over Pakistan.">
+<meta name="theme-color" content="#151311">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIWA's Wardrobe">
+<meta property="og:title" content="Shop Unstitched | LIWA's Wardrobe">
+<meta property="og:description" content="Browse ladies and gents unstitched suits by fabric, pieces, season and price. Cash on delivery all over Pakistan.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:wght@400;500;600&family=Great+Vibes&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="shop">
+<div id="head"></div>
+<main id="main">
+
+<div class="phead"><div class="crumb"><a href="index.html">Home</a> / <span id="crumb">Shop</span></div><h1 class="title" id="shopTitle">All Collections</h1><p class="lede" id="shopSub" style="margin:auto">Carefully selected unstitched fabrics for ladies and gents.</p></div>
+<section class="wrap" style="padding-top:34px">
+  <div class="shop">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="fg" id="fgC"></div><div class="fg" id="fgF"></div><div class="fg" id="fgP"></div><div class="fg" id="fgS"></div><div class="fg" id="fgR"></div>
+      <button class="btn ghost sm" type="button" id="clear">Clear all filters</button>
+    </aside>
+    <div>
+      <div class="bar"><button class="btn ghost sm fbtn" id="fBtn" type="button">Filters</button><span id="count" style="color:var(--muted)"></span>
+        <label>Sort by <select id="sort"><option value="f">Featured</option><option value="n">New first</option><option value="lh">Price: low to high</option><option value="hl">Price: high to low</option><option value="d">Biggest discount</option></select></label></div>
+      <div class="active-f" id="activeF" style="margin-bottom:16px"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="foot"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(function(){const {$,$$,card,paint,esc}=LW;
+const q=new URLSearchParams(location.search);
+const S={c:q.get('c')||'all',f:q.getAll('f'),pc:q.get('pc')||'',s:q.get('s')||'',pr:q.get('pr')||'',sort:q.get('sort')||'f'};
+const seasonOf=p=>(FABRICS.find(x=>x.n===p.f)||{}).s||'all';
+const C=[['all','All'],['ladies','Ladies Unstitched'],['gents','Gents Unstitched'],['new','New Arrivals'],['season','Seasonal Collection'],['sale','Special Offers'],['wishlist','My Wishlist']];
+const T={all:['All Collections','Carefully selected unstitched fabrics for ladies and gents.'],ladies:['Ladies Unstitched','Lawn, cotton, linen, khaddar, karandi and chiffon suits.'],gents:['Gents Unstitched','Wash & wear, boski, cotton, linen, karandi and khaddar suiting.'],new:['New Arrivals','The latest designs, added every week.'],season:['Seasonal Collection','Fabrics picked for the weather right now.'],sale:['Special Offers','Limited-time prices on selected suits.'],wishlist:['My Wishlist','Suits you saved with the heart button.']};
+const PR=[['','Any price'],['lo','Under Rs 3,000'],['md','Rs 3,000 – 5,000'],['hi','Above Rs 5,000']];
+const inC=p=>S.c==='all'||(S.c==='ladies'&&p.w==='L')||(S.c==='gents'&&p.w==='G')||(S.c==='wishlist'&&LW.wish.includes(p.id))||p.t===S.c;
+const inP=p=>!S.pr||(S.pr==='lo'&&p.p<3000)||(S.pr==='md'&&p.p>=3000&&p.p<=5000)||(S.pr==='hi'&&p.p>5000);
+function filters(){
+  const pool=PRODUCTS.filter(inC), fabs=[...new Set(pool.map(p=>p.f))];S.f=S.f.filter(f=>fabs.includes(f));
+  $('#fgC').innerHTML='<h4>Collection</h4>'+C.map(([v,l])=>`<label><input type="radio" name="c" value="${v}" ${S.c===v?'checked':''}>${l}</label>`).join('');
+  $('#fgF').innerHTML='<h4>Fabric</h4>'+fabs.map(f=>`<label><input type="checkbox" name="f" value="${esc(f)}" ${S.f.includes(f)?'checked':''}>${esc(f)}<span>${pool.filter(p=>p.f===f).length}</span></label>`).join('');
+  const lad=pool.some(p=>p.w==='L');
+  $('#fgP').innerHTML=lad?'<h4>Pieces</h4>'+[['','Any'],['3','3-Piece'],['2','2-Piece']].map(([v,l])=>`<label><input type="radio" name="pc" value="${v}" ${S.pc===v?'checked':''}>${l}</label>`).join(''):'';
+  $('#fgS').innerHTML='<h4>Season</h4>'+[['','Any season'],['summer','Summer'],['winter','Winter'],['all','Festive / all season']].map(([v,l])=>`<label><input type="radio" name="s" value="${v}" ${S.s===v?'checked':''}>${l}</label>`).join('');
+  $('#fgR').innerHTML='<h4>Price</h4>'+PR.map(([v,l])=>`<label><input type="radio" name="pr" value="${v}" ${S.pr===v?'checked':''}>${l}</label>`).join('');
+  $('#sort').value=S.sort;
+}
+function render(){
+  let list=PRODUCTS.filter(p=>inC(p)&&inP(p)&&(!S.f.length||S.f.includes(p.f))&&(!S.pc||(p.w==='L'&&String(p.pc)===S.pc))&&(!S.s||seasonOf(p)===S.s));
+  const by={lh:(a,b)=>a.p-b.p,hl:(a,b)=>b.p-a.p,n:(a,b)=>(b.t==='new')-(a.t==='new'),d:(a,b)=>LW.pct(b)-LW.pct(a)}[S.sort];if(by)list=[...list].sort(by);
+  $('#grid').innerHTML=list.length?list.map(card).join(''):`<p class="none">${S.c==='wishlist'?'Your wishlist is empty. Tap the heart on any suit to save it.':'No suits match these filters. <button class="link" style="background:none;border:0;cursor:pointer" id="clear2">Clear filters</button>'}</p>`;
+  paint($('#grid'));
+  $('#count').textContent=list.length+(list.length===1?' product':' products');
+  const [t,sub]=T[S.c]||T.all;$('#shopTitle').textContent=S.f.length===1?S.f[0]+' · '+t:t;$('#shopSub').textContent=sub;$('#crumb').textContent=t;
+  document.title=t+" | LIWA's Wardrobe";
+  const act=[...S.f.map(f=>['f',f,f]),S.pc&&['pc',S.pc,S.pc+'-Piece'],S.s&&['s',S.s,{summer:'Summer',winter:'Winter',all:'Festive'}[S.s]],S.pr&&['pr',S.pr,PR.find(x=>x[0]===S.pr)[1]]].filter(Boolean);
+  $('#activeF').innerHTML=act.map(([k,v,l])=>`<button class="chip" type="button" data-k="${k}" data-v="${esc(v)}" aria-label="Remove ${esc(l)} filter">${esc(l)} ×</button>`).join('');
+  const u=new URLSearchParams();if(S.c!=='all')u.set('c',S.c);S.f.forEach(f=>u.append('f',f));['pc','s','pr'].forEach(k=>S[k]&&u.set(k,S[k]));if(S.sort!=='f')u.set('sort',S.sort);
+  history.replaceState(null,'','?'+u.toString());
+}
+$('#filters').addEventListener('change',e=>{const t=e.target;if(t.name==='f')S.f=$$('#fgF input:checked').map(i=>i.value);else S[t.name]=t.value;if(t.name==='c')filters();render();});
+$('#sort').onchange=e=>{S.sort=e.target.value;render();};
+$('#activeF').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k;if(k==='f')S.f=S.f.filter(x=>x!==b.dataset.v);else S[k]='';filters();render();};
+const clear=()=>{Object.assign(S,{f:[],pc:'',s:'',pr:''});filters();render();};
+$('#clear').onclick=clear;document.addEventListener('click',e=>{if(e.target.id==='clear2')clear();});
+$('#fBtn').onclick=()=>$('#filters').classList.toggle('on');
+document.addEventListener('click',e=>{if(e.target.closest('[data-wish]')&&S.c==='wishlist')setTimeout(render,50);});
+filters();render();})();
+</script>
+</body>
+</html>
