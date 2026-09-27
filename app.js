@@ -129,7 +129,7 @@ function chrome(){
       <div><a class="brand" href="index.html" style="text-align:left;margin-bottom:14px"><b>LIWA<i>'s</i></b><small>WARDROBE</small></a>
         <p>Ladies & Gents Unstitched Collection. Carefully selected fabrics at fair prices, delivered all over Pakistan.</p>
         <div class="soc"><a href="${esc(S.facebook)}" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="${esc(S.instagram)}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="${wa("Assalam o Alaikum LIWA's Wardrobe!")}" target="_blank" rel="noopener" aria-label="WhatsApp">${I.wa}</a></div>
-        <div class="pay"><span>COD</span><span>Easypaisa</span><span>JazzCash</span><span>Bank Transfer</span></div></div>
+        <div class="pay"><span>COD</span><span>Easypaisa</span><span>Bank Transfer</span></div></div>
       <div><h4>Shop</h4><a href="shop.html?c=ladies">Ladies Unstitched</a><a href="shop.html?c=gents">Gents Unstitched</a><a href="shop.html?c=new">New Arrivals</a><a href="shop.html?c=season">Seasonal Collection</a><a href="shop.html?c=sale">Special Offers</a></div>
       <div><h4>Help</h4><a href="policies.html#shipping">Shipping & Delivery</a><a href="policies.html#exchange">Exchange & Return</a><a href="policies.html#payment">Payment</a><a href="contact.html#faq">FAQs</a><a href="fabric-guide.html">Fabric Guide</a></div>
       <div><h4>Contact</h4><p>WhatsApp: ${esc(S.whatsappDisplay)}</p><p>Email: ${esc(S.email)}</p><p>Instagram: ${esc(S.instagramHandle)}</p><p>${esc(S.city)}</p><a class="link" href="contact.html">All contact options</a></div>

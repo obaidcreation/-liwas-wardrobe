@@ -18,7 +18,7 @@ const SETTINGS = {
   freeDeliveryAbove: 5000,           // is se zyada order par delivery free
   advanceDiscount: 5,                // % discount agar customer advance payment kare
   exchangeDays: 7,
-  paymentAccounts: "Easypaisa: 0312 9997701"
+  paymentAccounts: "Easypaisa / JazzCash: 0300 0000000 (Account title: LIWA's Wardrobe)"
 };
 
 /* Product fields:
